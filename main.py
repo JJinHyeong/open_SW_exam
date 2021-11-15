@@ -2,19 +2,14 @@ import pygame
 from pygame.rect import *
 import random
 
-
-###################################################################
-###################################################################
 def restart():
     global isGameOver, score
     isGameOver = False
     score = 0
     for i in range(len(star)):
         recStar[i].y = -1
-    ###################################################################
 
 
-###################################################################
 def eventProcess():
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -22,19 +17,23 @@ def eventProcess():
                 pygame.quit()
 
             if event.key == pygame.K_LEFT:
-                move.x = -1
+                move.x = -2.5
             if event.key == pygame.K_RIGHT:
-                move.x = 1
+                move.x = 2.5
             if event.key == pygame.K_UP:
-                move.y = -1
+                move.y = -2.5
             if event.key == pygame.K_DOWN:
-                move.y = 1
-            if event.key == pygame.K_r:
+                move.y = 2.5
+            if event.key == pygame.K_SPACE:
                 restart()
 
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                move.x = 0
+            elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                move.y = 0
 
-###################################################################
-###################################################################
+
 def movePlayer():
     if not isGameOver:
         recPlayer.x += move.x
@@ -50,8 +49,6 @@ def movePlayer():
     SCREEN.blit(player, recPlayer)
 
 
-###################################################################
-###################################################################
 def timeDelay500ms():
     global time_delay_500ms
     if time_delay_500ms > 5:
@@ -83,8 +80,6 @@ def moveStar():
         SCREEN.blit(star[i], recStar[i])
 
 
-###################################################################
-###################################################################
 def CheckCollision():
     global score, isGameOver
     if isGameOver:
@@ -102,8 +97,6 @@ def CheckCollision():
     score += 1
 
 
-###################################################################
-###################################################################
 def blinking():
     global time_dealy_4sec, toggle
     time_dealy_4sec += 1
@@ -114,23 +107,21 @@ def blinking():
 
 
 def setText():
-    mFont = pygame.font.SysFont("arial", 20, True, False)
+    mFont = pygame.font.SysFont("arial", 40, True, False)
     SCREEN.blit(mFont.render(
         f'score : {score}', True, 'green'), (10, 10, 0, 0))
 
     if isGameOver and blinking():
         SCREEN.blit(mFont.render(
-            'Game Over!!', True, 'red'), (150, 300, 0, 0))
+            'Game Over!!', True, 'red'), (240, 300, 0, 0))
         SCREEN.blit(mFont.render(
-            'press R - Restart', True, 'red'), (140, 320, 0, 0))
+            'press SPACE - Restart', True, 'red'), (200, 340, 0, 0))
 
 
-###################################################################
-###################################################################
 # 1.변수초기화
 isActive = True
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 700
+SCREEN_HEIGHT = 700
 move = Rect(0, 0, 0, 0)
 time_delay_500ms = 0
 time_dealy_4sec = 0
@@ -141,39 +132,39 @@ isGameOver = False
 # 2.스크린생성
 pygame.init()
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('CodingNoew!!')
+pygame.display.set_caption('과제 피하기')
 
 # 3. player 생성
-player = pygame.image.load('C:/player.png')
-player = pygame.transform.scale(player, (20, 30))
+player = pygame.image.load('C:/wuwang.png')
+player = pygame.transform.scale(player, (45, 45))
 recPlayer = player.get_rect()
 recPlayer.centerx = (SCREEN_WIDTH / 2)
 recPlayer.centery = (SCREEN_HEIGHT / 2)
 # 4. 유성 생성
-star = [pygame.image.load('C:/star.png') for i in range(40)]
+star = [pygame.image.load('C:/star.png') for i in range(30)]
 recStar = [None for i in range(len(star))]
 for i in range(len(star)):
-    star[i] = pygame.transform.scale(star[i], (20, 20))
+    star[i] = pygame.transform.scale(star[i], (25, 25))
     recStar[i] = star[i].get_rect()
     recStar[i].y = -1
 
 # 5. 기타
 clock = pygame.time.Clock()
 
-#####반복####
+
 while isActive:
-    # 1.화면 지움
+    # 화면 지움
     SCREEN.fill((0, 0, 0))
-    # 2.이벤트처리
+    # 이벤트처리
     eventProcess()
-    # 3.플레이어 이동
+    # 플레이어 이동
     movePlayer()
-    # 4.유성 생성 및 이동
+    # 유성 생성 및 이동
     moveStar()
-    # 5.충돌 확인
+    # 충돌 확인
     CheckCollision()
-    # 6.text업데이트
+    # text업데이트
     setText()
-    # 7.화면 갱신
+    # 화면 재설정
     pygame.display.flip()
     clock.tick(100)
