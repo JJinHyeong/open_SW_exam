@@ -17,13 +17,13 @@ def eventProcess():
                 pygame.quit()
 
             if event.key == pygame.K_LEFT:
-                move.x = -2.5
+                move.x = -2
             if event.key == pygame.K_RIGHT:
-                move.x = 2.5
+                move.x = 2
             if event.key == pygame.K_UP:
-                move.y = -2.5
+                move.y = -2
             if event.key == pygame.K_DOWN:
-                move.y = 2.5
+                move.y = 2
             if event.key == pygame.K_SPACE:
                 restart()
 
@@ -118,9 +118,9 @@ def setText():
             'press SPACE - Restart', True, 'red'), (200, 340, 0, 0))
 
 
-# 1.변수초기화
+# 변수초기화
 isActive = True
-SCREEN_WIDTH = 700
+SCREEN_WIDTH = 720
 SCREEN_HEIGHT = 700
 move = Rect(0, 0, 0, 0)
 time_delay_500ms = 0
@@ -129,26 +129,25 @@ toggle = False
 score = 0
 isGameOver = False
 
-# 2.스크린생성
+# 스크린생성
 pygame.init()
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('과제 피하기')
+pygame.display.set_caption('C언어 피하기')
 
-# 3. player 생성
+# player 생성
 player = pygame.image.load('C:/wuwang.png')
-player = pygame.transform.scale(player, (45, 45))
+player = pygame.transform.scale(player, (50, 50))
 recPlayer = player.get_rect()
 recPlayer.centerx = (SCREEN_WIDTH / 2)
 recPlayer.centery = (SCREEN_HEIGHT / 2)
-# 4. 유성 생성
-star = [pygame.image.load('C:/star.png') for i in range(30)]
+# 유성 생성
+star = [pygame.image.load('C:/C.png') for i in range(30)]
 recStar = [None for i in range(len(star))]
 for i in range(len(star)):
     star[i] = pygame.transform.scale(star[i], (25, 25))
     recStar[i] = star[i].get_rect()
     recStar[i].y = -1
 
-# 5. 기타
 clock = pygame.time.Clock()
 
 
