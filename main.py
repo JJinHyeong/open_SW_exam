@@ -118,7 +118,7 @@ def setText():
             'press SPACE - Restart', True, 'red'), (200, 340, 0, 0))
 
 
-# 변수초기화
+
 isActive = True
 SCREEN_WIDTH = 720
 SCREEN_HEIGHT = 700
