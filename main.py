@@ -140,7 +140,7 @@ player = pygame.transform.scale(player, (50, 50))
 recPlayer = player.get_rect()
 recPlayer.centerx = (SCREEN_WIDTH / 2)
 recPlayer.centery = (SCREEN_HEIGHT / 2)
-# 유성 생성
+# 떨어지는 C언어 생성
 star = [pygame.image.load('C:/C.png') for i in range(50)]
 recStar = [None for i in range(len(star))]
 for i in range(len(star)):
@@ -154,11 +154,11 @@ clock = pygame.time.Clock()
 while isActive:
     # 화면 지움
     SCREEN.fill((0, 0, 0))
-    # 이벤트처리
+    # 방향키 조작 설정
     eventProcess()
     # 플레이어 이동
     movePlayer()
-    # 유성 생성 및 이동
+    # 떨어지는 C언어 생성 및 이동
     moveStar()
     # 충돌 확인
     CheckCollision()
