@@ -141,7 +141,7 @@ recPlayer = player.get_rect()
 recPlayer.centerx = (SCREEN_WIDTH / 2)
 recPlayer.centery = (SCREEN_HEIGHT / 2)
 # 유성 생성
-star = [pygame.image.load('C:/C.png') for i in range(30)]
+star = [pygame.image.load('C:/C.png') for i in range(50)]
 recStar = [None for i in range(len(star))]
 for i in range(len(star)):
     star[i] = pygame.transform.scale(star[i], (25, 25))
